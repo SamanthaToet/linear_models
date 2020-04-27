@@ -1,0 +1,44 @@
+---
+title: "ch1_intro"
+---
+
+```{r setup, include=FALSE}
+library(faraway)
+library(tidyverse)
+
+data(pima)
+
+pima$diastolic[pima$diastolic ==0] <- NA
+pima$glucose[pima$glucose == 0] <- NA
+pima$triceps[pima$triceps == 0] <- NA
+pima$insulin[pima$insulin == 0] <- NA
+pima$bmi[pima$bmi == 0] <- NA
+
+pima$test <- factor(pima$test)
+levels(pima$test) <- c("negative", "postive")
+```
+
+Regression analysis is another term for linear modeling, although regressions can be nonlinear. When the number of predictors (p) is 1, it's called simple regression. When there's more than one predictor, it's called multiple regression. 
+
+The response variable must be continuous. There are two main objectives: prediction and causality (relationship). 
+
+<!-- 1.) Make a numerical and graphical summary of the dataset `teengamb`, commenting on any features that you find interesting.  -->
+
+<!-- ```{r teengamb, include=TRUE} -->
+<!-- library(faraway) -->
+<!-- library(tidyverse) -->
+
+<!-- data(teengamb) -->
+
+<!-- teengamb$sex <- factor(teengamb$sex) # make sex a factor, not integer -->
+<!-- levels(teengamb$sex) <- c("male", "female") -->
+
+<!-- summary(teengamb) -->
+<!-- str(teengamb) -->
+
+<!-- teengamb %>% -->
+<!--   ggplot(aes(gamble, status, color = sex)) + -->
+<!--   geom_point() -->
+
+<!-- ``` -->
+
