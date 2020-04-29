@@ -7,6 +7,7 @@ The dataset `teengamb` concerns a study of teenage gambling in Britain. Fit a re
 
 ```{r 1}
 library(faraway)
+library(magrittr)
 library(tidyverse)
 
 data(teengamb)
@@ -15,7 +16,7 @@ levels(teengamb$sex) <- c("male", "female")
 
 tgamb_lm <- lm(gamble ~ sex + status + income + verbal,
            data = teengamb)
-sumary(tgamb_lm)
+summary(tgamb_lm)
 ```
 
 ## a.
@@ -59,6 +60,26 @@ cor(teengamb$income, resid(tgamb_lm))
 
 The correlation is even smaller, at -7.242e-17.
 
+## f. 
+For all other predictors held constant, what would be the difference in predicted expenditure on gambling for a male compared to a female?
 
+Looking back at `summary(tgamb_lm)`, the coefficient of `sexfemale` is -22.12. That means, the predicted expenditure drops $22.12 for women when compared to men. 
 
+# 2.
+The dataset `uswages` is drawn from a sample of the Current Population Survey in 1988. Fit a model with weekly wages as the response and years of education and experience as predictors. Report and give a simple interpretation to the regression coefficient for years of education. Now fit the same model but with logged weekly wages. Give an interpretation to the regression coefficient for years of education. Which interpretation is more natural?
+
+```{r 2}
+data(uswages)
+
+# make negative experience values 0
+uswages$exper %<>% ifelse(. < 0, 0, .)
+
+wage_lm <- lm(wage ~ educ + exper, data = uswages)
+sumary(wage_lm)
+
+log_wage_lm <- lm(log(wage) ~ educ + exper, data = uswages)
+sumary(log_wage_lm)
+```
+
+For every year of education, weekly wages should increase by $51.12 while considering experience. When the response variable is logged, for every year of education, weekly wages should increase by 9% considering experience. 
 
